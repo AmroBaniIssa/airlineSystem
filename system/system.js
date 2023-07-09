@@ -8,9 +8,7 @@ ioServer.on("connection", (socket) => {
   console.log("connected ", socket.id);
   
   socket.on('newFlight',()=>{
-    console.log("xoxoxoxoxoxoxoxooxoxoxoxox")
     setInterval(()=>{
-
         ioServer.emit('startFlight',true)
     },10000)
   })

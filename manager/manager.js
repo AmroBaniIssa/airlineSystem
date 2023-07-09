@@ -11,7 +11,7 @@ systemConnection.on('startFlight', handleFlight);
 
 function handleFlight() {
     // console.log("xoxoxoxoxoxoxoxooxoxoxoxox")
-  setInterval(() => {
+  setTimeout(() => {
     const Flight = {
       event: "new-flight",
       time: faker.date.future({ refDate: "2023-07-08T00:00:00.000Z" }),
