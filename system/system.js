@@ -12,7 +12,7 @@ ioServer.on("connection", (socket) => {
     setInterval(()=>{
 
         ioServer.emit('startFlight',true)
-    },1000)
+    },10000)
   })
 
   socket.on('new-flight', (flightDetails) => {

@@ -27,5 +27,5 @@ function handelTookOff(payload) {
   setTimeout(() => {
     console.log(`Flight ${flight.Details.flightID} has arrived.`);
     airlineConnection.emit("Arrived", flight);
-  }, 2000);
+  }, 7000);
 }
