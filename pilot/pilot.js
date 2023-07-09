@@ -9,7 +9,7 @@ let host2 = `http://localhost:${port}/airline`;
 
 const airlineConnection = io.connect(host2);
 
-airlineConnection.on("new-flight-Scheduled", handleFlight);
+systemConnection.on("new-flight-Scheduled", handleFlight);
 
 function handleFlight(flightDetails) {
   const flight = flightDetails;
@@ -19,13 +19,13 @@ function handleFlight(flightDetails) {
   }, 4000);
 }
 
-systemConnection.on("tooked-off", handelTookOff);
+airlineConnection.on("tooked-off", handelTookOff);
 
 function handelTookOff(payload) {
+  console.log("***********************")
   const flight = payload;
-
   setTimeout(() => {
     console.log(`Flight ${flight.Details.flightID} has arrived.`);
-    systemConnection.emit("Arrived", flight);
-  }, 7000);
+    airlineConnection.emit("Arrived", flight);
+  }, 2000);
 }

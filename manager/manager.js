@@ -25,12 +25,12 @@ function handleFlight() {
 
     console.log("A new flight with ID ", Flight.Details.flightID);
     systemConnection.emit("new-flight", Flight);
-  }, 10000);
+  }, 1000);
 
-  socket.on("flight-arrival", flightArrived);
-  function flightArrived(pilotName) {
-    console.log(
-      `Appreciation message to pilot ${pilotName}: Thank you for safely landing the flight.`
-    );
-  }
+  // socket.on("flight-arrival", flightArrived);
+  // function flightArrived(pilotName) {
+  //   console.log(
+  //     `Appreciation message to pilot ${pilotName}: Thank you for safely landing the flight.`
+  //   );
+  // }
 }
