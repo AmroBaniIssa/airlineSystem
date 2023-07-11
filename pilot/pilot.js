@@ -9,16 +9,25 @@ let host2 = `http://localhost:${port}/airline`;
 
 const airlineConnection = io.connect(host2);
 
-systemConnection.on("new-flight-Scheduled", handleFlight);
+socket.emit('get_all');
 
-function handleFlight(flightDetails) {
-  const flight = flightDetails;
+// systemConnection.on("new-flight-Scheduled", handleFlight);
+
+/// =========================================== event 5 ======================================================
+systemConnection.on("task", handleFlight);
+
+
+function handleFlight(task) {
+  const flight = task;
+  console.log('i got it.');
   setTimeout(() => {
     console.log(`Flight ${flight.Details.flightID} is taking off.`);
     airlineConnection.emit("took-off", flight);
   }, 4000);
 }
 
+
+/// ========================================= event 7 ========================================================
 airlineConnection.on("tooked-off", handelTookOff);
 
 function handelTookOff(payload) {
