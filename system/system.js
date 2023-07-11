@@ -33,7 +33,7 @@ ioServer.on("connection", (socket) => {
 
       msgQueue.tasks[id] = flightDetails;
       socket.emit('added', flightDetails);
-      family.emit('task', {
+      ioServer.emit('task', {
           id: id,
           payload: msgQueue.tasks[id]
       })
