@@ -7,6 +7,8 @@ const systemConnection = io.connect(host);
 const uuid = require("uuid");
 const { faker } = require("@faker-js/faker");
 
+
+///================================== event 3 ========================================================================
 systemConnection.on('startFlight', handleFlight);
 
 function handleFlight() {
@@ -27,6 +29,10 @@ function handleFlight() {
     systemConnection.emit("new-flight", Flight);
   }, 1000);
 
+  systemConnection.on('added',handleAdded)
+  function handleAdded(payload){
+    console.log('thank you for adding flight number:',payload.Details.flightID)
+  }
   // socket.on("flight-arrival", flightArrived);
   // function flightArrived(pilotName) {
   //   console.log(
