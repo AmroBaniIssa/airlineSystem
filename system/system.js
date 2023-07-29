@@ -1,6 +1,7 @@
 "use strict";
 require("dotenv").config();
 const port = process.env.PORT || 3030;
+const uuid = require("uuid");
 
 const ioServer = require("socket.io")(port);
 const msgQueue = {
@@ -28,8 +29,10 @@ ioServer.on("connection", (socket) => {
   /// ====================================  event 4 ================================================================================
     socket.on('new-flight', (flightDetails) => {
       console.log('i got your message')
+    // setInterval(()=>{
+
       console.log(`New flight scheduled. Details:`, flightDetails);
-      const id = uuid();
+      const id = uuid.v4();
 
       msgQueue.tasks[id] = flightDetails;
       socket.emit('added', flightDetails);
@@ -37,6 +40,8 @@ ioServer.on("connection", (socket) => {
           id: id,
           payload: msgQueue.tasks[id]
       })
+    // },10000)
+
   });
 
   socket.on('get_all', () => {
@@ -53,7 +58,7 @@ ioServer.on("connection", (socket) => {
   socket.on("Arrived", (task) => {
     delete msgQueue.tasks[task.id];
     console.log('msgQueue v2', msgQueue)
-    ioServer.emit("flight-arrival", payload);
+    ioServer.emit("flight-arrival", task);
   });
 });
 
